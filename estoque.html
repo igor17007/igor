@@ -1,50 +1,32 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estoque</title>
-
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-
 <body>
 
-    <div class="container">
+<h2>Estoque</h2>
 
-        <nav class="topo">
-            <a href="index.html">🏠 Início</a>
-            <a href="adicionar.html">➕ Adicionar Produto</a>
-        </nav>
+<table border="1" width="100%">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Qtd</th>
+            <th>Valor</th>
+            <th>Total</th>
+            <th>Ação</th>
+        </tr>
+    </thead>
 
-        <div class="estoque-card">
+    <tbody id="lista"></tbody>
+</table>
 
-            <div class="cabecalho-estoque">
+<br>
+<a href="adicionar.html">Adicionar Produto</a>
 
-                <div>
-                    <h1>Estoque</h1>
-                    <p>Gerencie seus produtos cadastrados</p>
-                </div>
-
-                <input
-                    type="text"
-                    id="pesquisa"
-                    placeholder="🔍 Pesquisar produto..."
-                    onkeyup="filtrarProdutos()"
-                >
-
-            </div>
-
-            <div class="tabela-container">
-
-                <table>
-
-                    <thead>
-                        <tr>
-                            <th>Produto</th>
-                            <th>Categoria</th>
-                            <th>Qtd</th>
-                            <th>Valor Unit.</th>
-                            <th>Total</th>
-                            <
+<script src="assets/js/script.js"></script>
+</body>
+</html>
