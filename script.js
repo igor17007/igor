@@ -1,103 +1,106 @@
+let produtos = JSON.parse(localStorage.getItem("produtos")) || [];
 
-let estoque = JSON.parse(localStorage.getItem("estoque")) || [];
-
-function salvarEstoque() {
-    localStorage.setItem("estoque", JSON.stringify(estoque));
+function salvarDados() {
+    localStorage.setItem(
+        "produtos",
+        JSON.stringify(produtos)
+    );
 }
 
 function adicionarProduto() {
-    let nome = document.getElementById("nome").value;
-    let quantidade = Number(document.getElementById("quantidade").value);
-    let valor = Number(document.getElementById("valor").value);
 
-    if (nome === "" || quantidade <= 0 || valor <= 0) {
+    let nome =
+        document.getElementById("nome").value;
+
+    let categoria =
+        document.getElementById("categoria").value;
+
+    let quantidade =
+        Number(document.getElementById("quantidade").value);
+
+    let valor =
+        Number(document.getElementById("valor").value);
+
+    if (
+        nome === "" ||
+        quantidade <= 0 ||
+        valor <= 0
+    ) {
+
         alert("Preencha todos os campos!");
+
         return;
     }
 
-    let produtoExistente = estoque.find(
-        p => p.nome.toLowerCase() === nome.toLowerCase()
+    let existente = produtos.find(
+        p =>
+        p.nome.toLowerCase() ===
+        nome.toLowerCase()
     );
 
-    if (produtoExistente) {
-        produtoExistente.quantidade += quantidade;
-        produtoExistente.valor = valor;
+    if (existente) {
+
+        existente.quantidade += quantidade;
+        existente.valor = valor;
+        existente.categoria = categoria;
+
     } else {
-        estoque.push({
+
+        produtos.push({
             nome,
+            categoria,
             quantidade,
             valor
         });
+
     }
 
-    salvarEstoque();
+    salvarDados();
 
-    alert("Produto adicionado com sucesso!");
+    alert("Produto adicionado!");
 
     document.getElementById("nome").value = "";
     document.getElementById("quantidade").value = "";
     document.getElementById("valor").value = "";
 }
 
-function mostrarEstoque() {
+function atualizarDashboard() {
 
-    let lista = document.getElementById("lista");
+    let totalProdutos = produtos.length;
 
-    if (!lista) return;
+    let valorTotal = 0;
 
-    lista.innerHTML = "";
+    produtos.forEach(produto => {
 
-    if (estoque.length === 0) {
-        lista.innerHTML = "<p>Estoque vazio.</p>";
-        return;
-    }
+        valorTotal +=
+            produto.quantidade *
+            produto.valor;
 
-    estoque.forEach(produto => {
-
-        let total = produto.quantidade * produto.valor;
-
-        lista.innerHTML += `
-            <div class="produto">
-                <h3>${produto.nome}</h3>
-                <p>Quantidade: ${produto.quantidade}</p>
-                <p>Valor Unitário: R$ ${produto.valor.toFixed(2)}</p>
-                <p>Valor Total: R$ ${total.toFixed(2)}</p>
-            </div>
-        `;
     });
-}
 
-function retirarProduto() {
-
-    let nome = document.getElementById("nomeRetirar").value;
-    let quantidade = Number(document.getElementById("qtdRetirar").value);
-
-    let produto = estoque.find(
-        p => p.nome.toLowerCase() === nome.toLowerCase()
-    );
-
-    if (!produto) {
-        alert("Produto não encontrado!");
-        return;
-    }
-
-    if (quantidade > produto.quantidade) {
-        alert("Quantidade maior que o estoque!");
-        return;
-    }
-
-    produto.quantidade -= quantidade;
-
-    if (produto.quantidade === 0) {
-        estoque = estoque.filter(
-            p => p.nome.toLowerCase() !== nome.toLowerCase()
+    let cardProdutos =
+        document.getElementById(
+            "totalProdutos"
         );
+
+    let cardValor =
+        document.getElementById(
+            "valorTotal"
+        );
+
+    if (cardProdutos) {
+
+        cardProdutos.innerHTML =
+            totalProdutos;
+
     }
 
-    salvarEstoque();
+    if (cardValor) {
 
-    alert("Produto retirado com sucesso!");
+        cardValor.innerHTML =
+            "R$ " +
+            valorTotal.toFixed(2);
 
-    document.getElementById("nomeRetirar").value = "";
-    document.getElementById("qtdRetirar").value = "";
+    }
+
 }
