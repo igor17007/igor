@@ -1,32 +1,81 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estoque</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h2>Estoque</h2>
+    <div class="container">
 
-<table border="1" width="100%">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Categoria</th>
-            <th>Qtd</th>
-            <th>Valor</th>
-            <th>Total</th>
-            <th>Ação</th>
-        </tr>
-    </thead>
+        <nav class="topo">
+            <a href="index.html">🏠 Início</a>
+            <a href="adicionar.html">➕ Adicionar Produto</a>
+        </nav>
 
-    <tbody id="lista"></tbody>
-</table>
+        <div class="estoque-card">
 
-<br>
-<a href="adicionar.html">Adicionar Produto</a>
+            <div class="cabecalho-estoque">
 
-<script src="assets/js/script.js"></script>
+                <div>
+                    <h1>📦 Estoque</h1>
+                    <p>Gerencie seus produtos cadastrados</p>
+                </div>
+
+                <input
+                    type="text"
+                    id="pesquisa"
+                    placeholder="🔍 Pesquisar produto..."
+                    onkeyup="filtrarProdutos()"
+                >
+
+            </div>
+
+            <div class="tabela-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Produto</th>
+                            <th>Categoria</th>
+                            <th>Qtd</th>
+                            <th>Valor Unit.</th>
+                            <th>Total</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="listaProdutos"></tbody>
+
+                </table>
+
+            </div>
+
+            <div class="rodape-estoque">
+
+                <h2>
+                    Valor Total:
+                    <span id="valorTotalEstoque">R$ 0,00</span>
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        carregarEstoque();
+    </script>
+
 </body>
+
 </html>
