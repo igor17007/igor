@@ -1,24 +1,60 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <title>Adicionar Produto</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Estoque</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h2>Adicionar Produto</h2>
+    <div class="container">
 
-<input id="nome" placeholder="Nome">
-<input id="categoria" placeholder="Categoria">
-<input id="quantidade" type="number" placeholder="Quantidade">
-<input id="valor" type="number" placeholder="Valor">
+        <header class="header">
+            <h1>📦 Sistema de Estoque</h1>
+            <p>Controle completo dos seus produtos</p>
+        </header>
 
-<button onclick="adicionarProduto()">Adicionar</button>
+        <section class="resumo">
 
-<br><br>
-<a href="estoque.html">Ir para estoque</a>
+            <div class="card-info">
+                <h2 id="totalProdutos">0</h2>
+                <span>Produtos cadastrados</span>
+            </div>
 
-<script src="assets/js/script.js"></script>
+            <div class="card-info">
+                <h2 id="valorTotal">R$ 0,00</h2>
+                <span>Valor total do estoque</span>
+            </div>
+
+        </section>
+
+        <section class="menu-principal">
+
+            <a href="adicionar.html" class="card-menu">
+                <div class="icone">➕</div>
+                <h2>Adicionar Produto</h2>
+                <p>Cadastrar novos itens no estoque</p>
+            </a>
+
+            <a href="estoque.html" class="card-menu">
+                <div class="icone">📦</div>
+                <h2>Ver Estoque</h2>
+                <p>Listar, editar e remover produtos</p>
+            </a>
+
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        atualizarDashboard();
+    </script>
+
 </body>
+
 </html>
