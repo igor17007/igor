@@ -1,5 +1,6 @@
 let produtos = JSON.parse(localStorage.getItem("produtos")) || [];
 
+// 🔥 Adicionar produto
 function adicionarProduto() {
 
     const nome = document.getElementById("nome").value;
@@ -7,7 +8,7 @@ function adicionarProduto() {
     const quantidade = parseInt(document.getElementById("quantidade").value);
     const valor = parseFloat(document.getElementById("valor").value);
 
-    if (!nome || !quantidade || !valor) {
+    if (!nome || isNaN(quantidade) || isNaN(valor)) {
         alert("Preencha todos os campos!");
         return;
     }
@@ -23,11 +24,18 @@ function adicionarProduto() {
 
     alert("Produto salvo com sucesso!");
 
+    // limpar campos
     document.getElementById("nome").value = "";
+    document.getElementById("categoria").value = "";
     document.getElementById("quantidade").value = "";
     document.getElementById("valor").value = "";
+
+    // 🔥 ATUALIZA A TABELA
+    carregarEstoque();
 }
 
+
+// 🔥 Carregar estoque na tabela
 function carregarEstoque() {
 
     const lista = document.getElementById("listaProdutos");
@@ -53,14 +61,13 @@ function carregarEstoque() {
             </tr>
         `;
     });
-
 }
 
+
+// 🔥 Retirar produto
 function retirarProduto(index) {
 
-    let qtd = prompt("Quantas unidades deseja retirar?");
-
-    qtd = parseInt(qtd);
+    let qtd = parseInt(prompt("Quantas unidades deseja retirar?"));
 
     if (isNaN(qtd) || qtd <= 0) return;
 
@@ -78,5 +85,8 @@ function retirarProduto(index) {
     localStorage.setItem("produtos", JSON.stringify(produtos));
 
     carregarEstoque();
-
 }
+
+
+// 🔥 Carrega automaticamente ao abrir a página
+window.onload = carregarEstoque;
