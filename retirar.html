@@ -1,1 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Retirar Produto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <h1>Retirar Produto</h1>
+
+    <div class="menu">
+        <a href="index.html">Adicionar Produto</a>
+        <a href="estoque.html">Ver Estoque</a>
+        <a href="retirar.html">Retirar Produto</a>
+    </div>
+
+    <div class="caixa">
+        <input type="text" id="nomeRetirar" placeholder="Nome do produto">
+        <input type="number" id="qtdRetirar" placeholder="Quantidade a retirar">
+
+        <button onclick="retirarProduto()">
+            Retirar do Estoque
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
