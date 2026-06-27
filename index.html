@@ -1,203 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema de Estoque</title>
-
-<style>
-body{
-    font-family:Arial,sans-serif;
-    background:#121212;
-    color:white;
-    margin:0;
-    padding:20px;
-}
-
-.container{
-    max-width:900px;
-    margin:auto;
-}
-
-h1{
-    text-align:center;
-    color:#00d084;
-}
-
-.formulario{
-    background:#1e1e1e;
-    padding:20px;
-    border-radius:15px;
-    margin-bottom:20px;
-}
-
-input{
-    width:100%;
-    padding:12px;
-    margin:8px 0;
-    border:none;
-    border-radius:8px;
-    font-size:16px;
-}
-
-button{
-    width:100%;
-    padding:12px;
-    background:#00d084;
-    color:white;
-    border:none;
-    border-radius:8px;
-    font-size:16px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:#00b36b;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:#1e1e1e;
-    border-radius:15px;
-    overflow:hidden;
-}
-
-th,td{
-    padding:15px;
-    text-align:center;
-}
-
-th{
-    background:#00d084;
-}
-
-tr:nth-child(even){
-    background:#2a2a2a;
-}
-
-.excluir{
-    background:red;
-    width:auto;
-    padding:8px 15px;
-}
-
-.total{
-    margin-top:20px;
-    font-size:22px;
-    text-align:right;
-    color:#00d084;
-}
-</style>
+    <title>Sistema de Estoque</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="container">
+    <h1>Sistema de Estoque</h1>
 
-<h1>📦 Sistema de Estoque</h1>
+    <div class="menu">
+        <a href="index.html">Adicionar Produto</a>
+        <a href="estoque.html">Ver Estoque</a>
+        <a href="retirar.html">Retirar Produto</a>
+    </div>
 
-<div class="formulario">
-<input type="text" id="nome" placeholder="Nome do produto">
-<input type="number" id="quantidade" placeholder="Quantidade">
-<input type="number" id="preco" placeholder="Preço (R$)">
-<button onclick="adicionarProduto()">Adicionar Produto</button>
-</div>
+    <div class="caixa">
+        <input type="text" id="nome" placeholder="Nome do produto">
+        <input type="number" id="quantidade" placeholder="Quantidade">
+        <input type="number" id="valor" placeholder="Valor unitário">
 
-<table>
-<thead>
-<tr>
-<th>Produto</th>
-<th>Quantidade</th>
-<th>Preço</th>
-<th>Total</th>
-<th>Ação</th>
-</tr>
-</thead>
+        <button onclick="adicionarProduto()">
+            Adicionar Produto
+        </button>
+    </div>
 
-<tbody id="listaProdutos">
-</tbody>
-
-</table>
-
-<div class="total" id="valorTotal">
-Valor do estoque: R$ 0,00
-</div>
-
-</div>
-
-<script>
-let produtos = JSON.parse(localStorage.getItem("estoque")) || [];
-
-function salvar(){
-    localStorage.setItem("estoque", JSON.stringify(produtos));
-}
-
-function atualizarTabela(){
-
-    let tabela = document.getElementById("listaProdutos");
-    tabela.innerHTML = "";
-
-    let totalEstoque = 0;
-
-    produtos.forEach((produto,index)=>{
-
-        let totalProduto = produto.quantidade * produto.preco;
-        totalEstoque += totalProduto;
-
-        tabela.innerHTML += `
-        <tr>
-            <td>${produto.nome}</td>
-            <td>${produto.quantidade}</td>
-            <td>R$ ${produto.preco.toFixed(2)}</td>
-            <td>R$ ${totalProduto.toFixed(2)}</td>
-            <td>
-                <button class="excluir"
-                onclick="excluirProduto(${index})">
-                Excluir
-                </button>
-            </td>
-        </tr>
-        `;
-    });
-
-    document.getElementById("valorTotal").innerHTML =
-    `Valor do estoque: R$ ${totalEstoque.toFixed(2)}`;
-
-    salvar();
-}
-
-function adicionarProduto(){
-
-    let nome = document.getElementById("nome").value;
-    let quantidade = Number(document.getElementById("quantidade").value);
-    let preco = Number(document.getElementById("preco").value);
-
-    if(nome === "" || quantidade <= 0 || preco <= 0){
-        alert("Preencha todos os campos corretamente!");
-        return;
-    }
-
-    produtos.push({
-        nome,
-        quantidade,
-        preco
-    });
-
-    document.getElementById("nome").value = "";
-    document.getElementById("quantidade").value = "";
-    document.getElementById("preco").value = "";
-
-    atualizarTabela();
-}
-
-function excluirProduto(index){
-    produtos.splice(index,1);
-    atualizarTabela();
-}
-
-atualizarTabela();
-</script>
+    <script src="script.js"></script>
 
 </body>
 </html>
