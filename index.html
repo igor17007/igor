@@ -1,49 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>BLK MKT</title>
+    <title>Calculadora</title>
+
     <style>
         body {
-            background-color: #111;
-            color: white;
             font-family: Arial, sans-serif;
+            background: #1e1e1e;
+            color: white;
             text-align: center;
-            padding-top: 100px;
+            margin-top: 100px;
         }
 
-        h1 {
-            font-size: 50px;
-            color: #00aaff;
+        .calculadora {
+            background: #2d2d2d;
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 15px;
         }
 
-        p {
-            font-size: 20px;
-            color: #ccc;
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 18px;
+            text-align: center;
         }
 
         button {
-            background: #00aaff;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            border-radius: 10px;
+            width: 60px;
+            height: 60px;
+            margin: 5px;
+            font-size: 20px;
             cursor: pointer;
-            margin-top: 20px;
+            border: none;
+            border-radius: 10px;
+            background: #4CAF50;
+            color: white;
         }
 
         button:hover {
-            background: #0088cc;
+            background: #45a049;
+        }
+
+        #resultado {
+            margin-top: 15px;
+            font-size: 24px;
         }
     </style>
 </head>
+
 <body>
 
-    <h1>BLK MKT</h1>
-    <p>Bem-vindo ao nosso site oficial.</p>
-    <p>Inovação, tecnologia e soluções digitais para o seu negócio.</p>
+    <div class="calculadora">
+        <h1>Calculadora</h1>
 
-    <button>Saiba Mais</button>
+        <input type="number" id="n1" placeholder="Primeiro número">
+        <input type="number" id="n2" placeholder="Segundo número">
+
+        <br>
+
+        <button onclick="calcular('+')">+</button>
+        <button onclick="calcular('-')">-</button>
+        <button onclick="calcular('*')">×</button>
+        <button onclick="calcular('/')">÷</button>
+
+        <div id="resultado">Resultado: 0</div>
+    </div>
+
+    <script>
+        function calcular(op) {
+            let n1 = Number(document.getElementById("n1").value);
+            let n2 = Number(document.getElementById("n2").value);
+            let resultado;
+
+            if (op == "+") {
+                resultado = n1 + n2;
+            } else if (op == "-") {
+                resultado = n1 - n2;
+            } else if (op == "*") {
+                resultado = n1 * n2;
+            } else if (op == "/") {
+                resultado = n1 / n2;
+            }
+
+            document.getElementById("resultado").innerHTML =
+                "Resultado: " + resultado;
+        }
+    </script>
 
 </body>
 </html>
