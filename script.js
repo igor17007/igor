@@ -103,4 +103,37 @@ function atualizarDashboard() {
 
     }
 
+    // PARTE 1
+let produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+
+function salvarDados() {
+    ...
+}
+
+function adicionarProduto() {
+    ...
+}
+
+function atualizarDashboard() {
+    ...
+}
+
+// COLE A PARTE 2 AQUI EMBAIXO
+
+function carregarEstoque() {
+    ...
+}
+
+function retirarProduto(indice) {
+    ...
+}
+
+function excluirProduto(indice) {
+    ...
+}
+
+function filtrarProdutos() {
+    ...
+}
+
 }
