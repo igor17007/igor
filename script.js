@@ -52,13 +52,13 @@ function adicionarProduto() {
         });
     }
 
-    salvarDados();
+salvarDados();
 
-    alert("Produto adicionado com sucesso!");
+mostrarNotificacao("✅ Produto adicionado com sucesso!");
 
-    nomeEl.value = "";
-    quantidadeEl.value = "";
-    valorEl.value = "";
+nomeEl.value = "";
+quantidadeEl.value = "";
+valorEl.value = "";
 
     atualizarDashboard();
 }
@@ -197,3 +197,19 @@ window.onload = function () {
     carregarEstoque();
     atualizarDashboard();
 };
+
+function mostrarNotificacao(texto) {
+
+    const notificacao = document.getElementById("notificacao");
+
+    if (!notificacao) return;
+
+    notificacao.innerText = texto;
+
+    notificacao.classList.add("mostrar");
+
+    setTimeout(function () {
+        notificacao.classList.remove("mostrar");
+    }, 3000);
+
+}
