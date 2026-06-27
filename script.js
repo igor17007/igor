@@ -1,15 +1,20 @@
 let produtos = JSON.parse(localStorage.getItem("produtos")) || [];
 
-// 🔥 Adicionar produto
+// SALVAR
+function salvar() {
+    localStorage.setItem("produtos", JSON.stringify(produtos));
+}
+
+// ADICIONAR
 function adicionarProduto() {
 
-    const nome = document.getElementById("nome").value;
-    const categoria = document.getElementById("categoria").value;
-    const quantidade = parseInt(document.getElementById("quantidade").value);
-    const valor = parseFloat(document.getElementById("valor").value);
+    const nome = document.getElementById("nome").value.trim();
+    const categoria = document.getElementById("categoria").value.trim();
+    const quantidade = Number(document.getElementById("quantidade").value);
+    const valor = Number(document.getElementById("valor").value);
 
-    if (!nome || isNaN(quantidade) || isNaN(valor)) {
-        alert("Preencha todos os campos!");
+    if (!nome || !categoria || quantidade <= 0 || valor <= 0) {
+        alert("Preencha corretamente!");
         return;
     }
 
@@ -20,73 +25,51 @@ function adicionarProduto() {
         valor
     });
 
-    localStorage.setItem("produtos", JSON.stringify(produtos));
+    salvar();
 
-    alert("Produto salvo com sucesso!");
+    alert("Produto adicionado!");
 
-    // limpar campos
     document.getElementById("nome").value = "";
     document.getElementById("categoria").value = "";
     document.getElementById("quantidade").value = "";
     document.getElementById("valor").value = "";
 
-    // 🔥 ATUALIZA A TABELA
     carregarEstoque();
 }
 
-
-// 🔥 Carregar estoque na tabela
+// RENDERIZAR
 function carregarEstoque() {
 
-    const lista = document.getElementById("listaProdutos");
-
+    const lista = document.getElementById("lista");
     if (!lista) return;
 
     lista.innerHTML = "";
 
-    produtos.forEach((produto, index) => {
+    produtos.forEach((p, index) => {
 
-        const total = produto.quantidade * produto.valor;
+        const total = p.quantidade * p.valor;
 
         lista.innerHTML += `
             <tr>
-                <td>${produto.nome}</td>
-                <td>${produto.categoria}</td>
-                <td>${produto.quantidade}</td>
-                <td>R$ ${produto.valor.toFixed(2)}</td>
+                <td>${p.nome}</td>
+                <td>${p.categoria}</td>
+                <td>${p.quantidade}</td>
+                <td>R$ ${p.valor.toFixed(2)}</td>
                 <td>R$ ${total.toFixed(2)}</td>
                 <td>
-                    <button onclick="retirarProduto(${index})">➖</button>
+                    <button onclick="remover(${index})">❌</button>
                 </td>
             </tr>
         `;
     });
 }
 
-
-// 🔥 Retirar produto
-function retirarProduto(index) {
-
-    let qtd = parseInt(prompt("Quantas unidades deseja retirar?"));
-
-    if (isNaN(qtd) || qtd <= 0) return;
-
-    if (qtd > produtos[index].quantidade) {
-        alert("Quantidade maior que o estoque!");
-        return;
-    }
-
-    produtos[index].quantidade -= qtd;
-
-    if (produtos[index].quantidade <= 0) {
-        produtos.splice(index, 1);
-    }
-
-    localStorage.setItem("produtos", JSON.stringify(produtos));
-
+// REMOVER
+function remover(index) {
+    produtos.splice(index, 1);
+    salvar();
     carregarEstoque();
 }
 
-
-// 🔥 Carrega automaticamente ao abrir a página
+// AUTO LOAD
 window.onload = carregarEstoque;
