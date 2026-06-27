@@ -1,9 +1,10 @@
 // ============================
-// BASE DO SISTEMA
+// BASE
 // ============================
 
 let produtos = JSON.parse(localStorage.getItem("produtos")) || [];
 
+// SALVAR
 function salvarDados() {
     localStorage.setItem("produtos", JSON.stringify(produtos));
 }
@@ -14,10 +15,20 @@ function salvarDados() {
 
 function adicionarProduto() {
 
-    const nome = document.getElementById("nome").value.trim();
-    const categoria = document.getElementById("categoria").value;
-    const quantidade = Number(document.getElementById("quantidade").value);
-    const valor = Number(document.getElementById("valor").value);
+    const nomeEl = document.getElementById("nome");
+    const categoriaEl = document.getElementById("categoria");
+    const quantidadeEl = document.getElementById("quantidade");
+    const valorEl = document.getElementById("valor");
+
+    if (!nomeEl || !categoriaEl || !quantidadeEl || !valorEl) {
+        alert("Erro: campos não encontrados!");
+        return;
+    }
+
+    const nome = nomeEl.value.trim();
+    const categoria = categoriaEl.value;
+    const quantidade = Number(quantidadeEl.value);
+    const valor = Number(valorEl.value);
 
     if (!nome || quantidade <= 0 || valor <= 0) {
         alert("Preencha todos os campos corretamente!");
@@ -45,16 +56,15 @@ function adicionarProduto() {
 
     alert("Produto adicionado com sucesso!");
 
-    // limpa campos
-    document.getElementById("nome").value = "";
-    document.getElementById("quantidade").value = "";
-    document.getElementById("valor").value = "";
+    nomeEl.value = "";
+    quantidadeEl.value = "";
+    valorEl.value = "";
 
     atualizarDashboard();
 }
 
 // ============================
-// DASHBOARD (INDEX)
+// DASHBOARD
 // ============================
 
 function atualizarDashboard() {
@@ -77,7 +87,7 @@ function atualizarDashboard() {
 }
 
 // ============================
-// CARREGAR ESTOQUE
+// ESTOQUE
 // ============================
 
 function carregarEstoque() {
@@ -113,16 +123,19 @@ function carregarEstoque() {
     });
 
     const totalEl = document.getElementById("valorTotalEstoque");
-    if (totalEl) totalEl.innerText = "R$ " + total.toFixed(2);
+
+    if (totalEl) {
+        totalEl.innerText = "R$ " + total.toFixed(2);
+    }
 }
 
 // ============================
-// RETIRAR PRODUTO
+// RETIRAR
 // ============================
 
 function retirarProduto(i) {
 
-    const qtd = Number(prompt("Quantas unidades deseja retirar?"));
+    const qtd = Number(prompt("Quantidade para retirar:"));
 
     if (isNaN(qtd) || qtd <= 0) return;
 
@@ -142,7 +155,7 @@ function retirarProduto(i) {
 }
 
 // ============================
-// EXCLUIR PRODUTO
+// EXCLUIR
 // ============================
 
 function excluirProduto(i) {
@@ -156,7 +169,7 @@ function excluirProduto(i) {
 }
 
 // ============================
-// FILTRO DE PRODUTOS
+// FILTRO
 // ============================
 
 function filtrarProdutos() {
@@ -177,7 +190,7 @@ function filtrarProdutos() {
 }
 
 // ============================
-// INICIALIZAÇÃO AUTOMÁTICA
+// INICIALIZAÇÃO SEGURA
 // ============================
 
 window.onload = function () {
