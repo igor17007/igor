@@ -1,90 +1,24 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Produto</title>
-
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
-
 <body>
 
-    <div class="container">
+<h2>Adicionar Produto</h2>
 
-        <nav class="topo">
-            <a href="index.html">🏠 Início</a>
-            <a href="estoque.html">📦 Estoque</a>
-        </nav>
+<input id="nome" placeholder="Nome">
+<input id="categoria" placeholder="Categoria">
+<input id="quantidade" type="number" placeholder="Quantidade">
+<input id="valor" type="number" placeholder="Valor">
 
-        <div class="form-card">
+<button onclick="adicionarProduto()">Adicionar</button>
 
-            <h1>Adicionar Produto</h1>
+<br><br>
+<a href="estoque.html">Ir para estoque</a>
 
-            <p class="subtitulo">
-                Cadastre um novo produto no estoque
-            </p>
-
-            <div class="campo">
-                <label>Nome do Produto</label>
-                <input
-                    type="text"
-                    id="nome"
-                    placeholder="Ex: Café Pilão 500g"
-                >
-            </div>
-
-            <div class="campo">
-                <label>Categoria</label>
-
-                <select id="categoria">
-                    <option>Bebidas</option>
-                    <option>Alimentos</option>
-                    <option>Limpeza</option>
-                    <option>Eletrônicos</option>
-                    <option>Outros</option>
-                </select>
-            </div>
-
-            <div class="duplo">
-
-                <div class="campo">
-                    <label>Quantidade</label>
-
-                    <input
-                        type="number"
-                        id="quantidade"
-                        placeholder="Digite a quantidade"
-                    >
-                </div>
-
-                <div class="campo">
-                    <label>Valor Unitário (R$)</label>
-
-                    <input
-                        type="number"
-                        step="0.01"
-                        id="valor"
-                        placeholder="Digite o valor"
-                    >
-                </div>
-
-            </div>
-
-            <button
-                class="btn-principal"
-                onclick="adicionarProduto()"
-            >
-                Salvar Produto
-            </button>
-
-        </div>
-
-    </div>
-
-    <script src="script.js"></script>
-
+<script src="assets/js/script.js"></script>
 </body>
-
 </html>
